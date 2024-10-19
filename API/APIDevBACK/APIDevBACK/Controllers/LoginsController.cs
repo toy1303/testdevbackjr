@@ -87,7 +87,7 @@ namespace APIDevBACK.Controllers
                 Usuario.LastLoginAttempt = DateTime.Now;
                 var entry = testContext.Entry(Usuario);
                 Console.WriteLine(entry.State);
-                Ccloglogin dCatlogion = this.testContext.Set<Ccloglogin>().FirstOrDefault(u => u.UserId == Usuario.UserId);
+                Ccloglogin dCatlogion = this.testContext.Set<Ccloglogin>().Where(u => u.UserId == Usuario.UserId).OrderBy(m => m.Fecha).FirstOrDefault();
                 dCatlogion.TipoMov = dCatlogion.TipoMov == 1 ? 0 : 1;
                 dCatlogion.Fecha = DateTime.Now;
                 this.testContext.Entry(dCatlogion).State = EntityState.Modified;
