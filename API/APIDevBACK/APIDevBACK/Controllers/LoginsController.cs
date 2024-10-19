@@ -87,14 +87,11 @@ namespace APIDevBACK.Controllers
                 Usuario.LastLoginAttempt = DateTime.Now;
                 var entry = testContext.Entry(Usuario);
                 Console.WriteLine(entry.State);
-                Ccloglogin dCatlogion = this.testContext.Ccloglogins.Where(m=>m.UserId==Usuario.UserId).OrderBy(m=>m.Fecha).LastOrDefault();
-                  // Guarda los cambios en la base de datos
-                  Ccloglogin ccloglogin = new Ccloglogin();   
-                  ccloglogin.UserId = Usuario.UserId;
-                  ccloglogin.Extension = null; 
-                  ccloglogin.User= Usuario;
-                  ccloglogin.TipoMov = dCatlogion.TipoMov == 1 ? 0 : 1;
-                  this.testContext.Ccloglogins.Add(ccloglogin);
+                Ccloglogin dCatlogion = this.testContext.Set<Ccloglogin>().FirstOrDefault(u => u.UserId == Usuario.UserId);
+                dCatlogion.TipoMov = dCatlogion.TipoMov == 1 ? 0 : 1;
+                dCatlogion.Fecha = DateTime.Now;
+                this.testContext.Entry(dCatlogion).State = EntityState.Modified;
+
                 this.testContext.SaveChanges();
                 respue.Mensaje = string.Format("Ultimo registro modificado correctamente IdUser: {0}", Usuario.UserId);
             }
