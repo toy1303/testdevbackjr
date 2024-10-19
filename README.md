@@ -33,6 +33,20 @@ Asegúrate de tener Docker instalado y corriendo en tu máquina. Luego, ejecuta 
 docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd'    -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
+```
+En la instalación de Dockers me manda este error que no supe como sulucionarlo.
+Busque en foros, chat gpt y muchas paginas de internet y aun no se resuelve para la versión de windows que manejo.
+
+
+Component Docker.Installer.AutoStartAction failed: Se denegó el acceso a la clave de Registro 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'.
+   en Docker.Installer.InstallWorkflow.<DoHandleD4WPackageAsync>d__30.MoveNext()
+--- Fin del seguimiento de la pila de la ubicación anterior donde se produjo la excepción ---
+   en System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   en System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   en Docker.Installer.InstallWorkflow.<DoProcessAsync>d__23.MoveNext()
+
+```
+
 6. Conéctate al servidor de SQL con cualquier herramienta como **SQL Server Management Studio** o **Azure Data Studio** utilizando las siguientes credenciales:
    - **Servidor**: localhost, puerto 1433
    - **Usuario**: sa
@@ -144,5 +158,52 @@ Trabaja en SQL Server y realiza las siguientes consultas basadas en la tabla `cc
 3. **Opcional**: Si incluiste pruebas unitarias, indica en el README cómo ejecutarlas.
 
 ---
+
+##Entrega DEV BD
+Para la bbase de datos es necesario ejecutar los siguientes archivos dee la carpeta:
+BD 
+1.- CreacionDAtabasesql.sql
+2.-creatabbla.sql
+3.-InsertArea.SQL
+4.-InsertccUsers.SQL
+5.-Insertintoccloglogin.SQL
+6.- ReporteHorasTrabajdas.SQL
+
+
+
+##Entrega DEV API
+
+La Tiene 5 endpoints.
+
+los cuales son:
+
+https://localhost:7171/Logins   //Metodo GET -----Obtiene todos los registros de la tabla ccloglogin
+https://localhost:7171/Logins   //Metodo POST --Insera un registro en la tala  ccloglogin
+{
+    "UserId" : 70,
+    "Extension" : -2,
+    "TipoMov" :1,
+    "Fecha": "2024-10-18T18:00:00"
+}
+
+
+https://localhost:7171/Logins/{id}  //metodo put actualiza un registro de la tala ccUsers e inserta uno en la tabla ccloglogin
+https://localhost:7171/Logins/70   
+
+https://localhost:7171/Logins/{id}  //Metodo delete borra un registro de la tabbla ccloglogin
+https://localhost:7171/Logins/10001
+
+https://localhost:7171/Reporte    //Metodo get obtiene las horas trabajadas por los usuarios.
+
+ 
+##Entrega de Reportes SQL
+El archivo UsuariosConmasSegundosymenosSegundoslogeados.sql 
+
+El primer registro de esta consulta en sql obtiene el usuario con mas tiemo logeeado 
+Y el segundo registro obtiene el usuario con menos tiempo logeado.
+
+El archivo PromedioDeSesion.SQL
+Devuelve el promedio de cada usuario por año y mes.
+
 
 Este examen evalúa tu capacidad para desarrollar APIs RESTful, realizar consultas avanzadas en SQL Server y generar reportes en formato CSV. Se valorará la organización del código, las mejores prácticas y cualquier documentación adicional que proporciones.

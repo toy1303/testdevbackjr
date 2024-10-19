@@ -7,6 +7,11 @@
 node_modules/
 dist/
 
+# Ignorar carpetas compiladas de .NET
+bin/
+obj/
+.vs/
+
 # Compiled Java class files
 *.class
 
